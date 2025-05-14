@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload & Train | KamiIntel Agent</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f7fa;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      h2 {
+        text-align: center;
+        color: #1a73e8;
+        margin-bottom: 1rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      input[type="file"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      }
+
+      input[type="submit"] {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #1e7e34;
+      }
+
+      .batch-btn {
+        display: inline-block;
+        background-color: #ff9800;
+        color: white;
+        padding: 10px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      .batch-btn:hover {
+        background-color: #e68a00;
+      }
+
+      .flash.success {
+        background: #e0f7e9;
+        color: #2e7d32;
+        padding: 12px;
+        border-radius: 6px;
+        margin-top: 1rem;
+      }
+
+      .flash.danger {
+        background: #ffe5e5;
+        color: #c62828;
+        padding: 12px;
+        border-radius: 6px;
+        margin-top: 1rem;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-top: 1.5rem;
+        text-decoration: none;
+        background: #007bff;
+        color: white;
+        padding: 10px 14px;
+        border-radius: 5px;
+      }
+
+      .back-link:hover {
+        background: #0056b3;
+      }
+
+      ul.uploaded-files {
+        margin-top: 20px;
+        padding-left: 20px;
+      }
+
+      ul.uploaded-files li {
+        margin-bottom: 6px;
+        color: #444;
+      }
+
+      h3 {
+        margin-top: 30px;
+        color: #1a73e8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>📁 Upload a File & Train</h2>
+
+      <!-- ✅ Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <!-- ✅ Upload Form -->
+      <form method="POST" enctype="multipart/form-data">
+        {# If using Flask-WTF or CSRF protection, include this: #}
+        {# {{ csrf_token() }} #}
+        <input
+          type="file"
+          name="ffd_file"
+          accept=".pdf,.docx,.txt,.xlsx,.xls,.pptx"
+          required
+        />
+        <input type="submit" value="🚀 Train from File" />
+      </form>
+
+      <!-- ✅ Train All -->
+      <a href="/train_all_uploads" class="batch-btn" title="Train all existing uploaded documents">
+        📂 Train All Uploaded Files
+      </a>
+
+      <!-- ✅ Uploaded Files -->
+      {% if uploaded_files %}
+        <h3>📄 Previously Uploaded Files</h3>
+        <ul class="uploaded-files">
+          {% for f in uploaded_files %}
+            <li>{{ f }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <!-- ✅ Back Button -->
+      <a href="/" class="back-link" title="Go back to home">⬅ Back to Home</a>
+    </div>
+  </body>
+</html>

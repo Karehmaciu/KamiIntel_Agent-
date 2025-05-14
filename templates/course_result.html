@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Course Result</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f8ff;
+        padding: 2rem;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #1a73e8;
+      }
+      pre {
+        background: #eef;
+        padding: 1rem;
+        border-radius: 6px;
+        white-space: pre-wrap;
+      }
+      .share {
+        margin-top: 2rem;
+      }
+      .btn {
+        display: inline-block;
+        margin: 0.5rem 0.5rem 0 0;
+        padding: 10px 14px;
+        background: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      .btn:hover {
+        background: #155ab6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+        "
+      >
+        <h1>✅ AI-Generated Course Outline</h1>
+        <a href="/" class="btn" style="background: #28a745"
+          >💬 Return to Chat</a
+        >
+      </div>
+      <p><strong>Topic:</strong> {{ prompt }}</p>
+      <p><strong>Category:</strong> {{ category }}</p>
+
+      <pre>{{ result }}</pre>
+
+      <div class="share">
+        <h3>📤 Share or Export Your Course</h3>
+        <a
+          class="btn"
+          href="mailto:?subject=Course Outline: {{ prompt }}&body=Check this course: {{ request.url }}"
+          target="_blank"
+          >📧 Email</a
+        >
+        <a
+          class="btn"
+          href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.url }}"
+          target="_blank"
+          >🔗 LinkedIn</a
+        >
+        <a
+          class="btn"
+          href="https://www.facebook.com/sharer/sharer.php?u={{ request.url }}"
+          target="_blank"
+          >📘 Facebook</a
+        >
+        <a
+          class="btn"
+          href="https://t.me/share/url?url={{ request.url }}"
+          target="_blank"
+          >📣 Telegram</a
+        >
+
+        <!-- Working downloads -->
+        <a
+          class="btn"
+          href="/chat_data/generated_courses/{{ course_file }}"
+          target="_blank"
+          >📥 Download .TXT</a
+        >
+        <a
+          class="btn"
+          href="/chat_data/generated_courses/{{ docx_file }}"
+          target="_blank"
+          >📥 DOCX</a
+        >
+
+        {% if pptx_file %}
+        <a
+          class="btn"
+          href="/chat_data/generated_courses/{{ pptx_file }}"
+          target="_blank"
+          >📊 PPTX</a
+        >
+        {% else %}
+        <a
+          class="btn"
+          href="#"
+          onclick="alert('🛠 Coming Soon: Export to Slides')"
+          >📊 PPTX</a
+        >
+        {% endif %}
+
+        <!-- Coming soon features -->
+        <a
+          class="btn"
+          href="#"
+          onclick="alert('🛠 Coming Soon: Voice MP3 Generator')"
+          >🎧 MP3</a
+        >
+        <a class="btn" href="#" onclick="alert('🛠 Coming Soon: PDF Export')"
+          >📄 PDF</a
+        >
+        <a class="btn" href="https://drive.google.com" target="_blank"
+          >📂 Google Drive</a
+        >
+        <a class="btn" href="https://dropbox.com" target="_blank">📁 Dropbox</a>
+        <a
+          class="btn"
+          href="#"
+          onclick="alert('🛠 Coming Soon: QR Code Generator')"
+          >🔳 QR Code</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

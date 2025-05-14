@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+env/
+venv/
+.env
+.venv
+
+# Node.js
+node_modules/
+
+# Application Data - Critical for Render size
+# This includes generated courses, reports, logs, uploads, and vector stores
+chat_data/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE / Editor specific (optional, but good practice)
+.vscode/
+# .idea/

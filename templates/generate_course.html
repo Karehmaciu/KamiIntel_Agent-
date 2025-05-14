@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Generate Course</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        background: #f0f8ff;
+      }
+      .container {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 700px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #1a73e8;
+      }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background: #1a73e8;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #155ab6;
+      }
+      .status {
+        margin-top: 2rem;
+        color: #444;
+        font-size: 1.1rem;
+      }
+      .top-link {
+        text-align: right;
+        margin-bottom: 10px;
+      }
+      .top-link a {
+        color: #1a73e8;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .top-link a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-link">
+        <a
+          href="/"
+          style="
+            background: #28a745;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 5px;
+            margin-right: 10px;
+          "
+          >💬 Back to Chat</a
+        >
+        <a href="/courses">📂 View Saved Courses</a>
+      </div>
+      <h1>📘 Course Generator Portal</h1>
+      <p>Type a topic below to generate an AI-powered training course.</p>
+
+      <form method="POST">
+        <label for="course_prompt">Course Topic:</label>
+        <input
+          type="text"
+          id="course_prompt"
+          name="course_prompt"
+          placeholder="e.g., Solar installation for schools"
+          required
+        />
+
+        <label for="category">Optional Category:</label>
+        <select name="category" id="category">
+          <option value="">-- Select Category (optional) --</option>
+          <option value="Solar">Solar</option>
+          <option value="Energy Efficiency">Energy Efficiency</option>
+          <option value="AI & Tech">AI & Tech</option>
+          <option value="Eco Tourism">Eco Tourism</option>
+        </select>
+
+        <button type="submit">Generate Course</button>
+      </form>
+
+      <div class="status">
+        <p>
+          🚀 We're working on automating voice, PDF, slides, and report
+          generation for each course.
+        </p>
+        <p>
+          <strong>Status:</strong> Form live, backend integration in progress.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

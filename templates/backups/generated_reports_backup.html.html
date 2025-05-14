@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Smart Course Generator | KamiIntel Agent</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f4f7fa;
+        padding: 2rem;
+        margin: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      h2 {
+        text-align: center;
+        color: #1a73e8;
+        margin-bottom: 1.5rem;
+      }
+
+      textarea {
+        width: 100%;
+        height: 140px;
+        font-size: 1rem;
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        margin-bottom: 1.5rem;
+      }
+
+      input[type="submit"],
+      .btn {
+        background-color: #1a73e8;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      input[type="submit"]:hover,
+      .btn:hover {
+        background-color: #0b5ec8;
+      }
+
+      .nav-buttons {
+        margin-top: 2rem;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .nav-buttons a {
+        background-color: #6c757d;
+      }
+
+      .nav-buttons a:hover {
+        background-color: #565e64;
+      }
+
+      .note {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 1rem;
+      }
+
+      .flash-messages {
+        margin-bottom: 1rem;
+        padding: 10px;
+        border-radius: 6px;
+        font-weight: bold;
+      }
+
+      .flash-messages.danger {
+        background: #ffe5e5;
+        color: #b71c1c;
+      }
+
+      .flash-messages.success {
+        background: #e0f7e9;
+        color: #2e7d32;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>📘 Smart Course Generator</h2>
+
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="flash-messages {{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <!-- Form -->
+      <form method="POST">
+        <label><strong>Enter topic or goal for the course:</strong></label>
+        <textarea
+          name="course_prompt"
+          placeholder="e.g., Introduction to Solar Systems"
+          required
+        >
+{{ request.form.course_prompt or '' }}</textarea
+        >
+
+        <label><strong>Optional: Choose a category:</strong></label>
+        <select name="category">
+          <option value="">Auto-detect</option>
+          <option value="solar">Solar</option>
+          <option value="energy">Energy</option>
+          <option value="environment">Environment</option>
+          <option value="training">Training</option>
+          <option value="business">Business</option>
+          <option value="safety">Safety</option>
+          <option value="policy">Policy</option>
+          <option value="communication">Communication</option>
+        </select>
+
+        <input type="submit" value="📘 Generate Course Outline" />
+      </form>
+
+      <p class="note">
+        This will generate a full course including learning objectives, key
+        topics, and exercises. The course will be saved automatically into a
+        categorized course folder.
+      </p>
+
+      <!-- Navigation -->
+      <div class="nav-buttons">
+        <a class="btn" href="/">🏠 Home</a>
+        <a class="btn" href="/upload">📤 Upload Document</a>
+        <a class="btn" href="/train">🧠 Train Agent</a>
+        <a class="btn" href="/slides">📊 Generate Slides</a>
+        <a class="btn" href="/reports">📁 View Reports</a>
+      </div>
+    </div>
+  </body>
+</html>

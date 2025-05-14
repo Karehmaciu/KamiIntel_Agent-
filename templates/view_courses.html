@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Course Manager | KamiIntel</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #eef6f8;
+        padding: 2rem;
+      }
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+      }
+      .top-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+      .back-btn {
+        background: #28a745;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .back-btn:hover {
+        background: #218838;
+      }
+      h1 {
+        color: #1a73e8;
+      }
+      .course-card {
+        background: #f0f8ff;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .course-info {
+        flex-grow: 1;
+      }
+      .course-title {
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+      .timestamp {
+        color: #666;
+        font-size: 0.9rem;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .btn {
+        background: #1a73e8;
+        color: white;
+        padding: 6px 10px;
+        font-size: 0.85rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn:hover {
+        background: #0f5bb8;
+      }
+      .note {
+        margin-top: 1rem;
+        font-style: italic;
+        color: #444;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-navigation">
+        <h1>📘 Course Library</h1>
+        <a href="/" class="back-btn">💬 Back to Chat</a>
+      </div>
+
+      <p class="note">
+        All AI-generated courses are saved automatically and can be edited in
+        Google Docs. To edit: download the file and
+        <a href="https://docs.google.com/document/u/0/" target="_blank"
+          >upload to Google Docs</a
+        >.
+      </p>
+
+      {% if courses %} {% for course in courses %}
+      <div class="course-card">
+        <div class="course-info">
+          <div class="course-title">{{ course.name }}</div>
+          <div class="timestamp">🕒 {{ course.time }}</div>
+          {% if course.category %}
+          <div class="category">📁 Category: {{ course.category }}</div>
+          {% endif %}
+          <div class="filetype">📄 Type: {{ course.type }}</div>
+        </div>
+        <div class="actions">
+          <a class="btn" href="{{ course.url }}">⬇️ Download</a>
+          <a 
+          <a class="btn" href="{{ url_for('view_course_detail', filename=course.name, category=course.category|default('general')) }}">📝 View</a>
+
+            class="btn"
+            href="https://docs.google.com/document/u/0/"
+            target="_blank"
+            >✏️ Open Google Docs</a
+          >
+          <a
+            class="btn"
+            href="{{ url_for('delete_course', filename=course.name) }}"
+            >🗑 Delete</a
+          >
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <p>No courses found.</p>
+      {% endif %}
+    </div>
+  </body>
+</html>
