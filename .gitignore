@@ -22,3 +22,6 @@ Desktop.ini
 # IDE / Editor specific (optional, but good practice)
 .vscode/
 # .idea/
+
+# Large files
+Unified_app/UnifiedKamiEcoApp.zip

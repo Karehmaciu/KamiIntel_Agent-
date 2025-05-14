@@ -34,6 +34,9 @@ from file_security import is_file_safe, is_file_size_safe, sanitize_filename
 app = Flask(__name__)
 app.secret_key = "your-secret-key"  # Consider using environment variables for secrets
 
+# Check if training should be disabled via environment variable
+TRAINING_DISABLED = os.environ.get('DISABLE_TRAINING', 'False').lower() == 'true'
+
 # Setup basic logging
 logging.basicConfig(
     level=logging.INFO,
@@ -218,6 +221,10 @@ def download_slide(filename):
 def upload_and_train_file():
     uploaded_files = []
 
+    if TRAINING_DISABLED:
+        flash("⚠️ File uploading and training is currently disabled on this instance.", "warning")
+        return render_template("upload.html", uploaded_files=uploaded_files, training_disabled=True)
+
     if request.method == "POST":
         file = request.files.get("ffd_file")
         if not file or file.filename == "":
@@ -255,7 +262,7 @@ def upload_and_train_file():
     if os.path.exists("chat_data/uploads"):
         uploaded_files = os.listdir("chat_data/uploads")
 
-    return render_template("train_ffd.html", uploaded_files=uploaded_files)
+    return render_template("upload.html", uploaded_files=uploaded_files, training_disabled=TRAINING_DISABLED)
 
 
 
@@ -629,4 +636,4 @@ if __name__ == "__main__":
     print("✅ About to start server on port 8002...")
     import socket
     print(f"🧪 Test - Local IP: http://{socket.gethostbyname(socket.gethostname())}:8002")    
-    app.run(debug=True, port=8002, host="0.0.0.0") 
+    app.run(debug=True, port=8002, host="0.0.0.0")
