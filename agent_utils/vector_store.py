@@ -1,6 +1,7 @@
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import CSVLoader
+from langchain_openai import ChatOpenAI
 import os
 
 VECTOR_DB_PATH = "chat_data/vector_store"
